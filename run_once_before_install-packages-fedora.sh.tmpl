@@ -1,0 +1,23 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/bin/bash
+
+# Update and install core binaries for Zsh and Neovim
+echo "⚡ Installing system dependencies..."
+
+sudo dnf install -y \
+    zsh \
+    neovim \
+    git \
+    curl \
+    ripgrep \
+    fd-find \
+    util-linux-user # Required for 'chsh'
+
+# Set Zsh as default shell if it isn't already
+if [ "$SHELL" != "$(which zsh)" ]; then
+    echo "🐚 Changing default shell to zsh..."
+    chsh -s $(which zsh)
+fi
+
+echo "✅ Dependencies installed!"
+{{ end -}}
