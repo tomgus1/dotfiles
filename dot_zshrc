@@ -1,0 +1,29 @@
+# 1. P10K INSTANT PROMPT (Must be at the top)
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# 2. PATHS
+export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
+
+# 3. ZIM INITIALIZATION
+export ZIM_HOME=~/.zim
+[[ -s ${ZIM_HOME}/init.zsh ]] && source ${ZIM_HOME}/init.zsh
+
+# 4. NVM LAZY LOAD
+export NVM_LAZY_LOAD=true
+export NVM_COMPLETION=true
+
+# 5. LOAD P10K CONFIG (Created by the wizard)
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# 6. KEYBINDINGS
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+# --- MAINTENANCE ---
+# Update Zim engine, all plugins, and recompile for speed
+alias update-shell='zimfw upgrade && zimfw update && zimfw compile && exec zsh'
+
+# Cleanup
+zcompile ~/.zshrc

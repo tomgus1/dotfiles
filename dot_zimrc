@@ -1,0 +1,18 @@
+# --- CORE ---
+zmodule environment
+zmodule input
+zmodule termtitle
+zmodule utility
+zmodule completion
+
+# --- PROMPT (The Speed King) ---
+zmodule romkatv/powerlevel10k
+
+# --- FISH-LIKE FEATURES ---
+zmodule zsh-users/zsh-autosuggestions
+zmodule zsh-users/zsh-syntax-highlighting
+zmodule zsh-users/zsh-history-substring-search
+
+# --- UTILS ---
+zmodule git
+zmodule lukechilds/zsh-nvm
