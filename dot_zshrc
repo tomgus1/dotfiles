@@ -6,8 +6,25 @@ fi
 # 2. PATHS
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
-# 3. ZIM INITIALIZATION
+# --- 3. ZIM INITIALIZATION ---
 export ZIM_HOME=~/.zim
+
+# This alias makes the 'zimfw' command work even if it's not "installed"
+alias zimfw='source ${ZIM_HOME}/zimfw.zsh'
+
+# BOOTSTRAP: If the folder is missing, download the manager
+if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
+  curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
+    https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+fi
+
+# INSTALL: If the plugins aren't loaded, install them quietly
+if [[ ! -f ${ZIM_HOME}/init.zsh ]]; then
+  # This uses the script we just downloaded to install everything in ~/.zimrc
+  source ${ZIM_HOME}/zimfw.zsh init -q
+fi
+
+# LOAD: Finally, source the plugins
 [[ -s ${ZIM_HOME}/init.zsh ]] && source ${ZIM_HOME}/init.zsh
 
 # 4. NVM LAZY LOAD
